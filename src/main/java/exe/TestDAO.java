@@ -8,9 +8,9 @@ public class TestDAO {
 		User emp = null;
 		try {
 			emp = new User();
-			emp.setAccount("spencer");
+			emp.setAccount("remon");
 			emp.setEmail("spen@123");
-			emp.setName("spencer");
+			emp.setName("remon");
 			emp.setPwd("123456");
 
 			DAOFactory.getInstance().doCreate(emp);
@@ -19,9 +19,9 @@ public class TestDAO {
 		}
 		try {
 			emp = new User();
-			emp.setAccount("eton");
+			emp.setAccount("kevin");
 			emp.setEmail("spen@123");
-			emp.setName("spencer");
+			emp.setName("kevin");
 			emp.setPwd("123456");
 
 			DAOFactory.getInstance().doCreate(emp);

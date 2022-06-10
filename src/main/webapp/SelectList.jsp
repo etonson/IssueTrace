@@ -13,13 +13,13 @@
 <caption  width="100%"><%=request.getAttribute("account")%> 歡迎回來</caption>
 
 
-<td width="25%" align="center">建立議題0</td>
+<td width="25%" align="center">建立議題</td>
 <td width="25%">
 <form action="<%= request.getContextPath() %>/CreateIssue.jsp" method="POST">
 <input type="submit" value="送出" size="2045"></form>
 </td>
 
-<td width="25%" align="center">回覆議題</td>
+<td width="25%" align="center">議題清單</td>
 <td width="25%">
 <form action="<%= request.getContextPath() %>/IssueList.jsp" method="POST">
 <input type="submit" value="送出" size="2045"></form>

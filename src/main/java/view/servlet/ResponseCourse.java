@@ -9,13 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import api.course.ApiCourse;
+import dao.factory.DAOFactory;
+import dao.vo.Issue;
+import dao.vo.User;
 
-@WebServlet("/ResponseIssue")
-public class ResponseIssue extends HttpServlet {
+@WebServlet("/ResponseCourse")
+public class ResponseCourse extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ResponseIssue() {
+	public ResponseCourse() {
 		super();
 	}
 
@@ -24,7 +26,6 @@ public class ResponseIssue extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -32,10 +33,26 @@ public class ResponseIssue extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		String reply = request.getParameter("reply");
-		int issueID = Integer.parseInt(request.getParameter("issueID"));
-		ApiCourse ac1 = new ApiCourse();
-		ac1.createCourseReply(reply, issueID);
+
+		String issueID = request.getParameter("issueID");
+		getAssignEmailByIssueID(issueID);
+
 	}
 
+	private String getAssignEmailByIssueID(String issueID) {
+		DAOFactory da = null;
+		String assignEmail;
+		try {
+			Issue issue = new Issue();
+			issue = da.getIssueInstance().findById(Integer.parseInt(issueID));
+			User user = new User();
+			user = da.getInstance().findById(issue.getAssigness());
+			assignEmail = user.getEmail();
+			System.out.println(assignEmail);
+			return assignEmail;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "no result";
+	}
 }
