@@ -9,11 +9,9 @@ public class SpendEmailexe {
 	public static void main(String[] args) {
 		String user="eton.lin@1177tech.com.tw";
 		String pwd="R303bg135";
-		EmailSessionObj session = new EmailSessionObj(user,pwd);
+		EmailSessionObj sessionObj = new EmailSessionObj(user,pwd);
 		MsgObj msgObj = new MsgObj(user, "this is a mail", "Hello, world!");
 		SpendEmail spendDriver = new SpendEmail();
-		spendDriver.spendEmail(msgObj, session);
+		spendDriver.spendEmail(msgObj, sessionObj);
 	}
-
-
 }

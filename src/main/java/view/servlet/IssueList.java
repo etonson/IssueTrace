@@ -26,7 +26,6 @@ public class IssueList extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		String issueID = request.getParameter("issueID");
-		System.out.println(issueID);
 		try {
 			request.setAttribute("issueID", issueID);
 			request.getRequestDispatcher("/ResponseIssue.jsp").forward(request, response);

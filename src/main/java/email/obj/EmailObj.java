@@ -7,13 +7,12 @@ public class EmailObj {
 	private String  SMTPport= "587";
 	private String SmtpStarttlsEnable = "true";
 	private boolean Auth=true;
+	public EmailObj() {
+	}
 	public EmailObj(String SMTPhost, String SMTPport, String SmtpStarttlsEnable) {
 		this.SMTPhost = SMTPhost;
 		this.SMTPport = SMTPport;
 		this.SmtpStarttlsEnable = SmtpStarttlsEnable;
-	}
-
-	public EmailObj() {
 	}
 
 	public String getSMTPhost() {

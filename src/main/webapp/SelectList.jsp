@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
+<%@ page import="javax.servlet.http.Cookie"%>
 <!DOCTYPE html>
 <html>
 <head>
+<%
+Cookie[] cookies = request.getCookies();
+String user = cookies[cookies.length - 1].getValue();
+%>
 <meta charset="utf-8">
 <title>選擇你要的功能</title>
 </head>
@@ -10,7 +15,7 @@
 
 <table border="1" width="100%" bordercolor="#ffea00">
 <tr>
-<caption  width="100%"><%=request.getAttribute("account")%> 歡迎回來</caption>
+<caption  width="100%"><%=user%> 歡迎回來</caption>
 
 
 <td width="25%" align="center">建立議題</td>

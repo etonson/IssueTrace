@@ -43,12 +43,9 @@ public class ResponseCourse extends HttpServlet {
 		DAOFactory da = null;
 		String assignEmail;
 		try {
-			Issue issue = new Issue();
-			issue = da.getIssueInstance().findById(Integer.parseInt(issueID));
-			User user = new User();
-			user = da.getInstance().findById(issue.getAssigness());
+			 Issue issue = da.getIssueInstance().findById(Integer.parseInt(issueID));
+			 User user = da.getInstance().findById(issue.getAssigness());
 			assignEmail = user.getEmail();
-			System.out.println(assignEmail);
 			return assignEmail;
 		} catch (Exception e) {
 			e.printStackTrace();

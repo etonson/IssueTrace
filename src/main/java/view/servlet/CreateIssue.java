@@ -2,6 +2,7 @@ package view.servlet;
 
 import java.io.IOException;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -15,16 +16,22 @@ import dao.vo.Issue;
 @WebServlet("/CreateIssue")
 public class CreateIssue extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private boolean preventionInsert=false;
 	public CreateIssue() {
 		super();
+
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
-
+@Override
+public void init(ServletConfig config) throws ServletException {
+	// TODO Auto-generated method stub
+	super.init(config);
+	preventionInsert = true;
+}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -49,8 +56,16 @@ public class CreateIssue extends HttpServlet {
 			issue.setRecipient(recipient);
 			issue.setStartDate(startDate);
 			issue.setStatus(status);
+			
+			if(preventionInsert) {
 			DAOFactory.getIssueInstance().doCreate(issue);
-
+			preventionInsert=false;
+			request.getRequestDispatcher("SelectList.jsp").forward(request, response);
+			}else 
+			{
+				request.getRequestDispatcher("SelectList.jsp").forward(request, response);
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
