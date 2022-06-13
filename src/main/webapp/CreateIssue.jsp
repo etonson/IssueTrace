@@ -29,7 +29,7 @@
 
 <tr>
 <td width="25%" align="center">議題描述:</td>
-<td width="75%" colspan="3"><textarea rows="3" name="issueDescribe" cols="54">請填入留言</textarea></td>
+<td width="75%" colspan="3"><textarea rows="3" name="issueDescribe" cols="54"></textarea></td>
 </tr>
 
 </table>

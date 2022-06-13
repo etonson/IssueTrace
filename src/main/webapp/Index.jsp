@@ -1,18 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="BIG5">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <hr size="5" align="center" noshade width="90%" color="0000ff">
 <table width="300 border="1 cellspacing="2">
-<caption>°lÂÜ¨Æ¶µ</caption>
-<td>°lÂÜ½s¸¹</td>
-<td>¼ÐÃD</td>
-<td>³Q«ü¬£ªÌ</td>
+<caption>è¿½è¹¤äº‹é …</caption>
+<td>è¿½è¹¤ç·¨è™Ÿ</td>
+<td>æ¨™é¡Œ</td>
+<td>è¢«æŒ‡æ´¾è€…</td>
 </table>
 </body>
 </html>

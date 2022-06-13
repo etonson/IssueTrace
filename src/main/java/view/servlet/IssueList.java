@@ -31,6 +31,7 @@ public class IssueList extends HttpServlet {
 			request.getRequestDispatcher("/ResponseIssue.jsp").forward(request, response);
  		} catch (Exception e) {
 			e.printStackTrace();
+			response.sendRedirect("FailurePage.jsp");
 		}
 	}
 

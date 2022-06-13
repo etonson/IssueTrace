@@ -9,14 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import api.email.SpendEmail;
+import api.login.UserInfo;
 import dao.factory.DAOFactory;
+import dao.vo.Course;
 import dao.vo.Issue;
 import dao.vo.User;
+import email.obj.EmailSessionObj;
+import email.obj.MsgObj;
 
 @WebServlet("/ResponseCourse")
 public class ResponseCourse extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private User assignedUser;
+	private User recipientedUser;
+	private String issueID;
+	private String courseID;
 	public ResponseCourse() {
 		super();
 	}
@@ -34,22 +42,40 @@ public class ResponseCourse extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 
-		String issueID = request.getParameter("issueID");
-		getAssignEmailByIssueID(issueID);
-
+		issueID = request.getParameter("issueID");
+		courseID=request.getParameter("courseID");
+		if(ToEmail()) 
+		{
+			response.sendRedirect("SelectList.jsp");
+		}else 
+		{
+			response.sendRedirect("FailurePage.jsp");
+		}
 	}
 
-	private String getAssignEmailByIssueID(String issueID) {
-		DAOFactory da = null;
-		String assignEmail;
+	private boolean ToEmail() {
 		try {
-			 Issue issue = da.getIssueInstance().findById(Integer.parseInt(issueID));
-			 User user = da.getInstance().findById(issue.getAssigness());
-			assignEmail = user.getEmail();
-			return assignEmail;
+			UserInfo userInfo = new UserInfo();
+			Course course = DAOFactory.getCourseInstance().findById(Integer.parseInt(courseID));
+			assignedUser = userInfo.getAssignedUserByIssueID(issueID);
+			recipientedUser = userInfo.getRecipientedUserByIssueID(issueID);
+			Issue issue = DAOFactory.getIssueInstance().findById(Integer.parseInt(issueID));	
+			String emailText = "任務名稱為<" + issue.getiIssueTitle() 
+								+ ">回復內容如下。 \n" 
+								+ course.getReply() 
+								+ "\n 若有疑問煩請提出。";
+			String toEmail = assignedUser.getEmail();
+			String fromEmail = recipientedUser.getEmail();
+			String Pwd = recipientedUser.getPwd();
+			EmailSessionObj sessionObj = new EmailSessionObj(fromEmail, Pwd);
+			MsgObj msgObj = new MsgObj(toEmail, "任務提交", emailText);
+			SpendEmail spendDriver = new SpendEmail();
+			spendDriver.spendEmail(msgObj, sessionObj);
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
-		return "no result";
 	}
+
 }

@@ -25,10 +25,11 @@
 </p>
 
 <tr>
-<td width="25%" align="center">回覆編號</td>
-<td width="25%" align="center">議題名稱</td>
-<td width="25%" align="center">指派者</td>
-<td width="25%" align="center">回覆時間</td>
+<td width="7%" align="center">回覆編號</td>
+<td width="7%" align="center">議題編號</td>
+<td width="22%" align="center">議題名稱</td>
+<td width="22%" align="center">指派者</td>
+<td width="22%" align="center">回覆時間</td>
 </tr>
 			<%
 			try {
@@ -44,7 +45,11 @@
 					out.println("<td width='7%' align='center'>");
 					out.println(String.valueOf(obj.get("courseID")));
 					out.println("</td>");
-
+					
+					out.println("<td width='7%' align='center'>");
+					out.println(String.valueOf(obj.get("issueID")));
+					out.println("</td>");
+					
 					out.println("<td width='22%' align='center'>");
 					out.println(String.valueOf(obj.get("issueTitle")));
 					out.println("</td>");

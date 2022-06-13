@@ -36,7 +36,7 @@ JSONObject obj = mt.findCourseListByCourseID(courseID);
 
 </table>
 <form action="<%= request.getContextPath() %>/ResponseCourse" method="POST">
-<input type="hidden" value=<%=obj.get("issueID") %> name="issueID" width="30%">	<input type="submit" value="提交" name="B1">
+<input type="hidden" value=<%=obj.get("issueID") %> name="issueID" width="30%"><input type="hidden" value=<%=request.getParameter("courseID") %> name="courseID" width="30%">	<input type="submit" value="提交" name="B1">
 </form>
 <p>&nbsp;</p>
 </body>

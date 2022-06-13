@@ -14,14 +14,12 @@ import api.course.ApiCourse;
 @WebServlet("/ResponseIssue")
 public class ResponseIssue extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private boolean preventReInput=false; 
-	
+
 	public ResponseIssue() {
 		super();
 	}
 
 	public void init(ServletConfig config) throws ServletException {
-		preventReInput=true;
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,16 +34,9 @@ public class ResponseIssue extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String reply = request.getParameter("reply");
 		int issueID = Integer.parseInt(request.getParameter("issueID"));
-		
-		if(preventReInput) {
+
 		ApiCourse ac1 = new ApiCourse();
 		ac1.createCourseReply(reply, issueID);
-		preventReInput=false;
-		}
-		else {
-			request.getRequestDispatcher("IssueList.jsp").forward(request, response);
-			System.out.println("FALSE");
-		}
+		response.sendRedirect("SelectList.jsp");
 	}
-
 }

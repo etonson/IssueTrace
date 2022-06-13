@@ -8,10 +8,10 @@ public class TestDAO {
 		User emp = null;
 		try {
 			emp = new User();
-			emp.setAccount("remon");
-			emp.setEmail("spen@123");
-			emp.setName("remon");
-			emp.setPwd("123456");
+			emp.setAccount("eton");
+			emp.setEmail("eton.lin@1177tech.com.tw");
+			emp.setName("eton");
+			emp.setPwd("R303bg135");
 
 			DAOFactory.getInstance().doCreate(emp);
 		} catch (Exception e) {

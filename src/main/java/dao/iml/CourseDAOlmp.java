@@ -32,7 +32,9 @@ public class CourseDAOlmp implements CourseDAO {
 	}
 
 	public List<Course> findAll() throws Exception {
-		String sql = "SELECT courseID,issueID,replyDate,reply" + "FROM ICourse";
+		String sql = "SELECT courseID,issueID,replyDate,reply" 
+					+ " FROM ICourse"
+					+" ORDER BY courseID";
 		stat = con.prepareStatement(sql);
 		ResultSet rs = stat.executeQuery();
 		Course course = null;
@@ -55,7 +57,8 @@ public class CourseDAOlmp implements CourseDAO {
 	}
 
 	public Course findById(int courseID) throws Exception {
-		String sql = "SELECT courseID,issueID,replyDate,reply" + "FROM ICourse WHERE courseID=?";
+		String sql = "SELECT courseID,issueID,replyDate,reply" 
+	+ " FROM ICourse WHERE courseID=?";
 		stat = con.prepareStatement(sql);
 		stat.setInt(1, courseID);
 		ResultSet rs = stat.executeQuery();

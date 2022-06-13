@@ -13,5 +13,7 @@ public interface IssueDAO {
 
 	public List<Issue> findAllByRecipient(String recipient) throws Exception;
 	
+	public List<Issue> findAllByAssigned(String assigness) throws Exception;
+	
 	public Issue findById(int issueID) throws Exception;
 }

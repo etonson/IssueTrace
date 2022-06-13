@@ -33,7 +33,11 @@ public class IssueDAOPoxy implements IssueDAO {
 		dbc.close();
 		return list;
 	}
-
+	public List<Issue> findAllByAssigned(String assigness) throws Exception {
+		List<Issue> list = dao.findAllByRecipient(assigness);
+		dbc.close();
+		return list;
+	}
 	public Issue findById(int issueID) throws Exception {
 		Issue issue = dao.findById(issueID);
 		dbc.close();

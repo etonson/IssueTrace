@@ -18,8 +18,10 @@ public class IssueDAOImpl implements IssueDAO {
 	}
 
 	public boolean doCreate(Issue issue) throws Exception {
-		String sql = "INSERT INTO IIssue(issueTitle," + "issueDescribe,status,recipient,"
-				+ "assigness,startDate,deadDate) " + "VALUES(?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO IIssue(issueTitle," 
+					+ " issueDescribe,status,recipient,"
+					+ "  assigness,startDate,deadDate)" 
+					+ " VALUES(?,?,?,?,?,?,?)";
 		stat = con.prepareStatement(sql);
 		stat.setNString(1, issue.getiIssueTitle());
 		stat.setNString(2, issue.getIssueDescribe());
@@ -38,7 +40,7 @@ public class IssueDAOImpl implements IssueDAO {
 
 	public List<Issue> findAll() throws Exception {
 		String sql = "SELECT issueID,issueTitle,issueDescribe,status,recipient,"
-				+ "assigness,startDate,deadDate FROM IIssue";
+				+ " assigness,startDate,deadDate FROM IIssue ORDER BY issueID";
 		stat = con.prepareStatement(sql);
 		ResultSet rs = stat.executeQuery();
 		Issue issue = null;
@@ -66,10 +68,37 @@ public class IssueDAOImpl implements IssueDAO {
 		}
 		return list;
 	}
+	public List<Issue> findAllByAssigned(String assigness) throws Exception {
+		String sql = "SELECT issueID,issueTitle,status,recipient,"
+				+ " assigness,startDate,deadDate FROM IIssue WHERE assigness=? ORDER BY issueID";
+		stat = con.prepareStatement(sql);
+		stat.setString(1, assigness);
+		ResultSet rs = stat.executeQuery();
+		Issue issue = null;
+		List<Issue> list = new ArrayList<Issue>();
+		while (rs.next()) {
+			int issueID = Integer.parseInt(rs.getString(1));
+			String issueTitle = rs.getString(2);
+			int status = Integer.parseInt(rs.getString(3));
+			String recipient = rs.getString(4);
+			String startDate = rs.getString(5);
+			String deadDate = rs.getString(6);
 
+			issue = new Issue();
+			issue.setIssueID(issueID);
+			issue.setIssueTitle(issueTitle);
+			issue.setStatus(status);
+			issue.setRecipient(recipient);
+			issue.setAssigness(assigness);
+			issue.setStartDate(startDate);
+			issue.setDeadDate(deadDate);
+			list.add(issue);
+		}
+		return list;
+	}
 	public List<Issue> findAllByRecipient(String recipient) throws Exception {
 		String sql = "SELECT issueID,issueTitle,status,recipient,"
-				+ "assigness,startDate,deadDate FROM IIssue WHERE recipient=?";
+				+ " assigness,startDate,deadDate FROM IIssue WHERE recipient=? ORDER BY issueID";
 		stat = con.prepareStatement(sql);
 		stat.setString(1, recipient);
 		ResultSet rs = stat.executeQuery();
@@ -98,7 +127,7 @@ public class IssueDAOImpl implements IssueDAO {
 
 	public Issue findByrRecipient(String recipient) throws Exception {
 		String sql = "SELECT issueID,issueTitle,issueDescribe,status,recipient,"
-				+ "assigness,startDate,deadDate FROM IIssue WHERE recipient=?";
+				+ " assigness,startDate,deadDate FROM IIssue WHERE recipient=?";
 		stat = con.prepareStatement(sql);
 		stat.setString(1, recipient);
 		ResultSet rs = stat.executeQuery();
